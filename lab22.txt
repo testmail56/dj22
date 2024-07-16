@@ -1,0 +1,152 @@
+#views
+
+from django.shortcuts import render 
+def home(request): 
+    return render(request, 'website_pages/home.html') 
+def about_us(request): 
+    return render(request, 'website_pages/about_us.html') 
+def contact_us(request): 
+    return render(request, 'website_pages/contact_us.html')
+
+#website_page/urls.py
+
+from django.urls import path 
+from website_pages import views 
+urlpatterns = [ 
+path('home/', views.home, name='home'), 
+path('about_us/', views.about_us, name='about_us'), 
+path('contact_us/', views.contact_us, name='contact_us'), 
+] 
+
+#templates/layout.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}My Website{% endblock %}</title>
+<style>
+body { 
+font-family: Arial, sans-serif; 
+margin: 0; 
+padding: 0; 
+} 
+header { 
+background-color: #333; 
+color: #fff; 
+padding: 10px; 
+} 
+nav ul { 
+list-style-type: none; 
+padding: 0; 
+} 
+nav ul li { 
+display: inline; 
+margin-right: 20px; 
+} 
+nav ul li a { 
+text-decoration: none; 
+color: #fff; 
+} 
+main { 
+padding: 20px; 
+}
+footer { 
+background-color: #333; 
+color: #fff; 
+text-align: center; 
+padding: 10px; 
+position: fixed; 
+bottom: 0; 
+width: 100%; 
+} 
+</style>
+</head>
+<body>
+<header>
+<nav>
+<ul>
+<li><a href="{% url 'home' %}">Home</a></li>
+<li><a href="{% url 'about_us' %}">About Us</a></li>
+<li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+</ul>
+</nav>
+</header>
+<main>
+{% block content %} 
+{% endblock %} 
+</main>
+<footer>
+<p>&copy; 2024 My Website. All rights reserved. </p>
+<p>Developed by CIT</p>
+</footer>
+</body>
+</html>
+
+#Lab2/website_page/templates/website_page/home.html
+
+{% extends 'layout.html' %} 
+{% block title %}Home{% endblock %} 
+{% block content %} 
+<h1>Welcome to Sapthagiri college of engineering</h1>
+<p>Empowering students with a blend of knowledge and innovation.</p>
+<p>Nestled in the bustling city of Bengaluru, our campus is a hub of academic 
+excellence and 
+cutting-edge research.</p>
+<h2>Discover Your Potential</h2>
+<ul>
+<li><strong>Undergraduate Programs:</strong> Dive into our diverse range of 
+engineering 
+courses designed to fuel your passion and drive innovation.</li>
+<li><strong>Postgraduate Programs:</strong> Advance your expertise with our 
+specialized 
+master's programs and embrace leadership in technology.</li>
+</ul>
+<p>Join our vibrant community where ideas flourish and inventions come to life 
+in our state-of-the
+art labs and research centers.</p>
+<p>Benefit from our strong industry ties and placement programs that open 
+doors to exciting career 
+opportunities.</p>
+{% endblock %}
+
+
+#Lab2/website_page/templates/website_page/about_us.html
+
+{% extends 'layout.html' %} 
+{% block title %}About Us{% endblock %} 
+{% block content %} 
+<h1>Our Legacy</h1>
+<p>Founded on the principles of quality education and societal contribution, 
+we've been at the 
+forefront of technological education for over four decades.</p>
+<h1>Vision and Mission</h1>
+<p>Our vision is to be a beacon of knowledge that lights the way for aspiring 
+minds, and our mission 
+is to nurture innovative thinkers who will shape the future of technology.</p>
+<h1>Campus Life</h1>
+<p>Experience a dynamic campus life enriched with cultural activities, 
+technical clubs, and 
+community service initiatives that foster holistic development.</p>
+{% endblock %}
+
+
+#Lab2/website_page/templates/website_page/contact_us.html
+
+{% extends 'layout.html' %} 
+{% block title %}Contact Us{% endblock %} 
+{% block content %} 
+<h1>Get in Touch</h1>
+<p>For admissions and inquiries, reach out to us at:</p>
+<ul>
+<li><strong>Email:</strong> admissions@cambridge.edu.in</li>
+<li><strong>Phone:</strong> +91-9731998888</li>
+</ul>
+<h1>Visit Our Campus</h1>
+<p>Cambridge Institute of Technology - Main Campus</p>
+<p>KR Puram, Bengaluru - 560036</p>
+<p>We welcome you to be a part of our thriving community that's dedicated to 
+creating a better 
+tomorrow through technology and innovation.</p>
+{% endblock %} 
